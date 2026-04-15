@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<title>ProtoLab Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#0f172a;color:white}
+
+/* HEADER */
+header{
+background:#1e293b;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+header h1{color:#38bdf8;font-size:24px}
+
+.cart-icon{
+position:relative;
+font-size:22px;
+cursor:pointer;
+}
+.cart-count{
+position:absolute;
+top:-8px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:3px 7px;
+border-radius:50%;
+}
+header{
+background:#1e293b;
+padding:20px 40px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* Center Navigation */
+.nav-links{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:35px;
+}
+
+/* Nav Links Style */
+.nav-links a{
+color:white;
+text-decoration:none;
+font-weight:600;
+position:relative;
+padding:5px 0;
+transition:0.3s;
+}
+
+/* Underline Animation */
+.nav-links a::after{
+content:'';
+position:absolute;
+left:0;
+bottom:-4px;
+width:0%;
+height:2px;
+background:#38bdf8;
+transition:0.3s ease;
+}
+
+.nav-links a:hover{
+color:#38bdf8;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+/* Logo animation */
+.logo{
+
+font-size:26px;
+font-weight:700;
+letter-spacing:1px;
+color:#38bdf8;
+}
+
+.logo:hover{
+transform:scale(1.05);
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(to right,#0f172a,#1e293b);
+}
+.hero h2{
+font-size:40px;
+font-weight:800;
+margin-bottom:10px;
+}
+.hero p{color:#94a3b8}
+
+/* SEARCH */
+.search-bar{text-align:center;margin:30px 0;}
+.search-bar input{
+padding:10px 15px;
+width:300px;
+border-radius:8px;
+border:none;
+outline:none;
+}
+
+/* CATEGORY */
+.categories{text-align:center;margin-bottom:20px;}
+.categories button{
+margin:5px;
+padding:8px 14px;
+background:#38bdf8;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+.categories button:hover{background:#0ea5e9}
+
+/* PRODUCTS */
+.products{padding:40px}
+.product-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+text-align:center;
+transition:0.3s;
+}
+.card:hover{transform:translateY(-5px)}
+.card img{
+width:100%;
+height:150px;
+object-fit:contain;
+background:white;
+border-radius:6px;
+}
+
+.add-btn{
+margin-top:10px;
+padding:8px 12px;
+background:#38bdf8;
+border:none;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s ease;
+}
+.add-btn:hover{background:#0ea5e9}
+.add-btn.clicked{
+background:#22c55e !important;
+transform:scale(1.15);
+}
+
+/* SIDE CART */
+.side-cart{
+position:fixed;
+top:0;
+right:-350px;
+width:350px;
+height:100%;
+background:#111827;
+padding:20px;
+overflow-y:auto;
+transition:0.3s;
+z-index:1000;
+}
+.side-cart.active{right:0;}
+
+.cart-item{
+margin-bottom:15px;
+border-bottom:1px solid #333;
+padding-bottom:10px;
+}
+
+.qty-btn{
+padding:4px 10px;
+background:#38bdf8;
+border:none;
+border-radius:4px;
+cursor:pointer;
+color:white;
+}
+
+.remove-btn{
+background:red;
+padding:4px 8px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+margin-left:10px;
+color:white;
+}
+
+.whatsapp-order-btn{
+margin-top:20px;
+width:100%;
+padding:15px;
+background:linear-gradient(45deg,#25D366,#1ebe5d);
+border:none;
+border-radius:8px;
+color:white;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+.whatsapp-order-btn:hover{
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* CONTACT */
+.contact{
+background:#1e293b;
+padding:40px;
+text-align:center;
+margin-top:40px;
+}
+.contact a{
+display:block;
+margin:10px;
+color:#38bdf8;
+text-decoration:none;
+font-weight:600;
+}
+
+.floating-wa{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+background:#25D366;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
+z-index:2000;
+}
+.floating-wa i{
+font-size:30px;
+color:white;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#111827;
+margin-top:20px;
+}
+
+.nav-links{
+display:flex;
+gap:20px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#38bdf8;
+}
+
+.reviews{
+background:#111827;
+padding:50px 20px;
+text-align:center;
+}
+
+.review-form{
+max-width:500px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea{
+padding:10px;
+border-radius:6px;
+border:none;
+outline:none;
+}
+
+.review-form textarea{
+min-height:100px;
+resize:none;
+}
+
+.review-form button{
+background:#38bdf8;
+border:none;
+padding:12px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.review-form button:hover{
+background:#0ea5e9;
+}
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:5000;
+}
+
+.popup-content{
+background:#1e293b;
+padding:30px;
+border-radius:10px;
+text-align:center;
+width:300px;
+animation:fadeIn 0.3s ease;
+}
+
+.popup-content h2{
+color:#22c55e;
+margin-bottom:10px;
+}
+
+.popup-content button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+background:#38bdf8;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.popup-content button:hover{
+background:#0ea5e9;
+}
+
+@keyframes fadeIn{
+from{transform:scale(0.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+/* Hamburger hidden on desktop */
+.menu-toggle{
+display:none;
+font-size:24px;
+cursor:pointer;
+color:white;
+}
+
+/* Mobile View */
+@media (max-width: 768px){
+
+.nav-links{
+position:fixed;
+top:70px;
+left:-100%;
+width:100%;
+transform: none;
+background:#1e293b;
+flex-direction:column;
+text-align:center;
+gap:20px;
+padding:20px 0;
+transition:0.3s;
+}
+
+.nav-links.active{
+left:0;
+}
+
+.menu-toggle{
+display:block;
+}
+
+}
+header{
+background:#1e293b;
+padding:20px 40px;
+display:flex;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.left{
+justify-self:start;
+}
+
+.right{
+justify-self:end;
+display:flex;
+align-items:center;
+gap:15px;
+}
+.price{
+color:#22c55e;
+font-weight:600;
+margin:6px 0;
+}
+
+.whatsapp-order-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+
+/* IMAGE BOX */
+.img-box{
+position:relative;
+overflow:hidden;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* IMAGE */
+.img-box img{
+width:100%;
+height:150px;
+object-fit:contain;
+background:white;
+transition:0.4s ease;
+}
+
+/* OVERLAY */
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+color:white;
+padding:10px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+opacity:0;
+transition:0.4s ease;
+font-size:13px;
+border-radius:10px;
+}
+
+/* 🔥 HOVER EFFECT */
+.img-box:hover img{
+transform:scale(1.1);
+filter:blur(3px) brightness(0.6);
+}
+
+.img-box:hover .overlay{
+opacity:1;
+}
+
+#infoBox{
+position:fixed;
+right:20px;
+top:50%;
+transform:translateY(50%);
+width:250px;
+background:#1e293b;
+color:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+display:none;
+z-index:2000;
+pointer-events:none;
+}
+
+#infoBox img{
+width:100%;
+height:120px;
+object-fit:contain;
+background:white;
+border-radius:6px;
+margin-bottom:10px;
+}
+
+#infoBox h3{
+margin-bottom:8px;
+color:#38bdf8;
+}
+
+#infoBox p{
+font-size:13px;
+line-height:1.4;
+}
+
+/* SECTION */
+.why-top{
+padding:60px 40px;
+text-align:center;
+
+}
+
+/* TITLE */
+.why-title{
+font-family:'Space Grotesk',sans-serif;
+font-size:34px;
+font-weight:700;
+letter-spacing:0.5px;
+/* margin-top: ; */
+}
+
+/* GRID */
+.why-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+max-width:1100px;
+margin:auto;
+}
+.products{
+padding-bottom:20px; /* niche ka gap kam */
+}
+
+.why-top{
+margin-top:10px; /* thoda upar laaye but safe */
+padding-top:20px;
+}
+/* CARD */
+.why-card{
+background:linear-gradient(145deg,#1e293b,#0f172a);
+padding:25px;
+border-radius:15px;
+transition:0.3s;
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+position:relative;
+overflow:hidden;
+}
+
+/* ICON */
+.why-card .icon{
+font-size:28px;
+margin-bottom:10px;
+}
+
+/* HOVER EFFECT */
+.why-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* GLOW EFFECT */
+.why-card::before{
+content:'';
+position:absolute;
+width:200%;
+height:200%;
+background:linear-gradient(120deg,transparent,#38bdf8,transparent);
+top:-100%;
+left:-100%;
+transform:rotate(25deg);
+transition:0.5s;
+opacity:0;
+}
+
+.why-card:hover::before{
+top:100%;
+left:100%;
+opacity:0.3;
+}
+
+/* TEXT */
+.why-card h3{
+margin-bottom:8px;
+font-size:18px;
+font-family:'Space Grotesk',sans-serif;
+font-weight:600;
+}
+
+.why-card p{
+font-size:14px;
+color:#94a3b8;
+}
+
+
+html{
+scroll-behavior:smooth;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-family:'Space Grotesk',sans-serif;
+font-size:22px;
+font-weight:700;
+color:#38bdf8;
+}
+
+.logo img{
+width:80px;
+height:35px;
+object-fit:contain;
+}
+html{
+scroll-behavior:smooth;
+scroll-padding-top:80px; /* 🔥 navbar height ke equal */
+}
+.shop-header{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* SHOP TAG */
+.shop-tag{
+font-family: inter,system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+color:#38bdf8;
+letter-spacing:2px;
+font-size:18px;
+margin-bottom:5px;
+}
+
+/* TITLE */
+.shop-title{
+font-size:32px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+/* SUBTITLE */
+.shop-subtitle{
+color:#94a3b8;
+font-size:14px;
+}
+.shop-title{
+font-family:'Space Grotesk',sans-serif;
+letter-spacing:0.5px;
+}
+
+.card-details{
+margin-top:10px;
+font-size:13px;
+text-align:left;
+opacity:0;
+max-height:0;
+overflow:hidden;
+transition:0.3s;
+}
+
+
+.card-details.show{
+opacity:1;
+max-height:200px;
+}
+
+.card-details span{
+font-weight:700;
+}
+
+.type{ color:#38bdf8; }
+.use{ color:#22c55e; }
+.used{ color:#a78bfa; }
+.about{ color:#4ade80; }
+
+
+.footer{
+background:#020617;
+padding:50px 40px 20px;
+color:#cbd5f5;
+}
+
+.footer-container{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:40px;
+max-width:1100px;
+margin:auto;
+}
+
+/* LEFT */
+.footer-left h2{
+color:#38bdf8;
+margin-bottom:10px;
+margin-left: 20px;
+
+}
+
+.footer-left p{
+max-width:300px;
+font-size:14px;
+margin-left: 20px;
+}
+
+/* LINKS */
+.footer-links h3,
+.footer-contact h3{
+margin-bottom:10px;
+}
+
+.footer-links a{
+display:block;
+margin-bottom:6px;
+color:#94a3b8;
+text-decoration:none;
+transition:0.3s;
+}
+
+.footer-links a:hover{
+color:#38bdf8;
+}
+
+/* CONTACT */
+.footer-contact p{
+margin-bottom:6px;
+font-size:14px;
+}
+
+/* BOTTOM */
+.footer-bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:15px;
+font-size:13px;
+color:#64748b;
+}
+
+/* LINE */
+.footer hr{
+border:0.5px solid #1e293b;
+margin:20px 0;
+}
+
+@media(max-width:700px){
+.footer-container{
+flex-direction:column;
+}
+
+.footer-bottom{
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="left">
+<div class="logo">
+<img src="images/protolab_logo_transparent.jpg" alt="logo">
+<span>ProtoLab Store <style> .span{
+    font-family: 'Space Grotesk', sans-serif;
+}</style></span>
+</div>
+</div>
+
+<nav class="nav-links" id="navLinks">
+<a href="#home">Home <style> a{
+    font-family: 'Space Grotesk', sans-serif;
+}</style></a>
+<a href="#products">Components <style> a{
+    font-family: 'Space Grotesk', sans-serif;
+}</style> </a>
+<a href="#projects">Projects <style> a{
+    font-family: 'Space Grotesk', sans-serif;
+}</style></a>
+<a href="#why">Why Us <style> a{
+    font-family: 'Space Grotesk', sans-serif;
+}</style></a>
+<a href="#contact">Contact <style> a{
+    font-family: 'Space Grotesk', sans-serif;
+}</style></a>
+</nav>
+
+<div class="right">
+<div class="menu-toggle" onclick="toggleMenu()">
+<i class="fa-solid fa-bars"></i>
+</div>
+
+<div class="cart-icon" onclick="toggleCart()">
+<i class="fa-solid fa-cart-shopping"></i>
+<span class="cart-count" id="cartCount">0</span>
+</div>
+</div>
+</header>
+
+<section class="hero" id="home">
+<h2>Your One Stop IoT & Robotics Marketplace<style> h2{
+   font-family : 'Space Grotesk' ,sans-serif;}
+</style></h2>
+
+<p style="font-size:18px;margin-top:10px;">
+Learn • Build • Buy — All in One Platform 🚀
+</p>
+
+<p style="margin-top:10px;color:#94a3b8;">
+Each component includes simple explanation for beginners
+</p>
+</section>
+
+<section id = "why" class="why-top">
+<h2 class="why-title"> Why Choose ProtoLab?"</h2>
+
+<div class="why-grid">
+
+<div class="why-card">
+<div class="icon">📘</div>
+<h3>Beginner Friendly</h3>
+<p>Every product comes with a plain-English explanation. No jargon, no confusion — just clear guidance for first-time makers.</p>
+</div>
+
+<div class="why-card">
+<div class="icon">⚡</div>
+<h3>Learn Before You Buy</h3>
+<p>Hover over any product to see what it does, where it's used, and how it works — before you add it to your cart.</p>
+</div>
+
+<div class="why-card">
+<div class="icon">💰</div>
+<h3>Affordable Pricing</h3>
+<p>We source directly to keep prices low. Get quality components starting at just ₹29 — perfect for students and hobbyists.</p>
+</div>
+
+<div class="why-card">
+<div class="icon">💬</div>
+<h3>Fast WhatsApp Orders</h3>
+<p>No complex checkout. Just tap "Order on WhatsApp", confirm your order in chat, and receive your components fast.</p>
+</div>
+
+</div>
+
+</section>
+<div class="shop-header">
+
+<p class="shop-tag">SHOP</p>
+
+<h2 class="shop-title">Components & Modules</h2>
+
+<p class="shop-subtitle">
+Hover over any card to learn what the component does before you buy.
+</p>
+
+</div>
+
+<div class="categories">
+<button onclick="filterCategory('All')">All</button>
+<button onclick="filterCategory('Board')">Boards</button>
+<button onclick="filterCategory('Sensor')">Sensors</button>
+<button onclick="filterCategory('Display')">Displays</button>
+<button onclick="filterCategory('Motor')">Motors</button>
+<button onclick="filterCategory('Module')">Modules</button>
+<button onclick="filterCategory('Power')">Power</button>
+</div>
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="Search components..." onkeyup="searchProducts()">
+</div>
+
+
+<section class="products">
+<section class="products" id="products"></section>
+<div class="product-grid" id="productGrid"></div>
+<section id="projects" class="products">
+<h2 style="text-align:center;margin-bottom:30px;">Ready-Made Projects</h2>
+
+<div class="product-grid">
+
+<!-- <div class="card">
+<img src="images/line_follower.jpg">
+<h3>Line Follower Robot</h3>
+<p>Arduino Based | IR Sensors | Motor Driver</p>
+<button class="add-btn" onclick="addToCart('Line Follower Robot',this)">
+Add to Cart
+</button>
+</div> -->
+
+<div class="card">
+<img src="images/smart_home.png">
+<h3>Smart Home Automation</h3>
+<p>ESP8266 | IoT | Mobile Control</p>
+<button class="add-btn" id="btn-Smart Home Automation" onclick="addToCart('Smart Home Automation',this)">
+Add to Cart
+</button>
+</div>
+
+<div class="card">
+<img src="images/gas_leakage.jpg">
+<h3>Gas Leakage Detector</h3>
+<p>MQ2 Sensor | Buzzer Alert</p>
+<button class="add-btn" id="btn-Gas Leakage Detector" onclick="addToCart('Gas Leakage Detector',this)">
+Add to Cart
+</button>
+</div>
+
+<div class="card">
+<img src="images/attendance_rfid.png">
+<h3>RFID Attendance System</h3>
+<p>Arduino + RC522</p>
+<button class="add-btn" id="btn-RFID Attendance System" onclick="addToCart('RFID Attendance System',this)">
+Add to Cart
+</button>
+</div>
+
+</div>
+</section>
+</section>
+
+<div class="side-cart" id="sideCart">
+<div style="display:flex;justify-content:space-between;align-items:center;">
+<h2>Your Cart</h2>
+<span style="cursor:pointer;font-size:22px;" onclick="toggleCart()">✖</span>
+</div>
+<div id="cartItems" style="margin-top:15px;">Cart Empty</div>
+<button class="whatsapp-order-btn" onclick="sendWhatsApp()">
+<i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+</button>
+<button class="whatsapp-order-btn" onclick="payNow()" 
+style="margin-top:10px;background:linear-gradient(45deg,#6366f1,#4f46e5);">
+💳 Pay Now
+</button>
+</div>
+
+
+<section class="reviews">
+<h2>Send Your Review</h2>
+
+<div class="review-form">
+<input type="text" id="reviewName" placeholder="Your Name">
+
+<select id="reviewRating">
+<option value="5">★★★★★ (5)</option>
+<option value="4">★★★★☆ (4)</option>
+<option value="3">★★★☆☆ (3)</option>
+<option value="2">★★☆☆☆ (2)</option>
+<option value="1">★☆☆☆☆ (1)</option>
+</select>
+
+<textarea id="reviewText" placeholder="Write your review..."></textarea>
+
+<button onclick="sendReviewToWhatsApp()">Submit Review 🚀 </button>
+</div>
+</section>
+
+
+
+<div class="floating-wa" onclick="openWhatsApp()">
+<i class="fa-brands fa-whatsapp"></i>
+</div>
+
+<script>
+
+/* PRODUCT DATA */
+
+let products=[];
+
+let categories={
+Board:["Arduino Uno","Arduino Nano","Arduino Mega","ESP32","ESP8266","Raspberry Pi Pico","STM32","Arduino Micro","Arduino Due","Breadboard"],
+Sensor:["Ultrasonic","MQ2","MQ3","MQ135","DHT11","DHT22","PIR","IR Sensor","Soil Moisture","Flame","Sound","LDR","Touch Sensor","MPU6050","ADXL345","RFID","Fingerprint","Gas Sensor","Pressure Sensor","BMP280","Barometer","Current Sensor","Voltage Sensor"],
+Display:["16x2 LCD","20x4 LCD","OLED 0.96","OLED 1.3","7 Segment","TFT Display"],
+Motor:["SG90 Servo","MG995 Servo","DC Motor","BO Motor","Stepper Motor","Vibration Motor"],
+Module:["HC05","HC06","GPS","WiFi Module","Bluetooth Module"],
+Power:["Relay 5V","Relay 12V","LM2596","Battery Holder","18650 Battery","9V Clip","Power Module","Buck Converter"]
+};
+
+/* IMAGE MAP — YAHAN TUM IMAGES ADD KAROGE */
+let imageMap={
+    "Arduino Uno":"images/arduino_uno.jpg",
+    "Arduino Nano":"images/arduino_nano.jpg",
+    "Arduino Mega":"images/arduino_mega.jpg",
+    "ESP32":"images/esp32.jpg",
+    "ESP8266":"images/esp8266.jpg",
+    "Raspberry Pi Pico":"images/rp_pico.jpg",
+    "STM32":"images/stm32.jpg",
+   // "Teensy":"images/teensy.jpg",
+    "Arduino Micro":"images/arduino_micro.jpg",
+    "Arduino Due":"images/arduino_due.jpg",
+    "Breadboard":"images/breadboard.jpg",
+    "Ultrasonic":"images/ultrasonic.jpg",
+    "MQ2":"images/mq2.jpg",
+    "MQ3":"images/mq3.jpg",
+    "MQ135":"images/mq135.jpg",
+    "DHT11":"images/dht11.jpg",
+    "DHT22":"images/dht22.jpg",
+    "PIR":"images/pir.jpg",
+    "IR Sensor":"images/ir_sensor.jpg",
+    "Soil Moisture":"images/soil_moisture.jpg",
+    "Flame":"images/flame.jpg",
+    "Sound":"images/sound.jpg",
+    "LDR":"images/ldr.jpg",
+    "Touch Sensor":"images/touch_sensor.jpg",
+    "MPU6050":"images/mpu6050.jpg",
+    "ADXL345":"images/adxl.jpg",
+    "RFID":"images/rfid.jpg",
+    "Fingerprint":"images/fingerprint.jpg",
+    "Gas Sensor":"images/gas_sensor.jpg",
+    "Pressure Sensor":"images/pressure_sensor.jpg",
+    "BMP280":"images/bmp280.jpg",
+    "Barometer":"images/barometer.jpg",
+    "Current Sensor":"images/current_sensor.jpg",
+    "Voltage Sensor":"images/voltage_sensor.jpg",
+    "16x2 LCD":"images/16x2_lcd.jpg",
+    "20x4 LCD":"images/20x4_lcd.jpg",
+    "OLED 0.96":"images/oled_096.jpg",
+    "OLED 1.3":"images/oled_13.jpg",
+    "7 Segment":"images/7_segment.jpg",
+    "TFT Display":"images/tft_display.jpg",
+    "SG90 Servo":"images/sg90_servo.jpg",
+    "MG995 Servo":"images/mg995_servo.jpg",
+    "DC Motor":"images/dc_motor.jpg",
+    "BO Motor":"images/bo_motor.jpg",
+    "Stepper Motor":"images/stepper_motor.jpg",
+    "Vibration Motor":"images/vibration_motor.jpg",
+    "HC05":"images/hc05.jpg",
+    "HC06":"images/hc06.jpg",
+    "GPS":"images/gps.jpg",
+    "WiFi Module":"images/wifi_module.jpg",
+    "Bluetooth Module":"images/bluetooth_module.jpg",
+    "Relay 5V":"images/relay_5v.jpg",
+    "Relay 12V":"images/relay_12v.jpg",
+    "LM2596":"images/lm2596.jpg",
+    "Battery Holder":"images/battery_holder.jpg",
+    "18650 Battery":"images/18650_battery.jpg",
+    "9V Clip":"images/9v_clip.jpg",
+    "Power Module":"images/power_module.jpg",
+    "Buck Converter":"images/buck_converter.jpg",
+
+};
+ 
+
+let infoMap = {
+
+/* ================= BOARDS ================= */
+
+"Arduino Uno":"TYPE: Microcontroller Board\nUSE: Controls and manages electronic components using programmable code\nUSED IN: Robotics, IoT projects, automation systems, DIY electronics\nABOUT: One of the most popular beginner-friendly boards. It acts as the brain of your project by reading inputs and controlling outputs easily",
+
+"Arduino Nano":"TYPE: Compact Microcontroller Board\nUSE: Used for small and space-saving electronic projects\nUSED IN: Embedded systems, portable devices, mini robotics\nABOUT: A smaller version of Arduino Uno with similar functionality, perfect when space is limited",
+
+"Arduino Mega":"TYPE: Advanced Microcontroller Board\nUSE: Handles complex circuits with many inputs and outputs\nUSED IN: Large robotics projects, automation systems, industrial setups\nABOUT: Offers more pins and memory than Uno, making it ideal for advanced and large-scale projects",
+
+"Arduino Micro":"TYPE: USB Microcontroller Board\nUSE: Enables direct USB communication with devices\nUSED IN: Keyboard/mouse emulation, custom controllers\nABOUT: Built-in USB support allows it to behave like a keyboard or mouse",
+
+"Arduino Due":"TYPE: High-Speed Microcontroller Board\nUSE: Executes complex and fast operations\nUSED IN: Advanced applications, real-time systems\nABOUT: More powerful and faster than Uno, suitable for high-performance projects",
+
+"ESP32":"TYPE: WiFi & Bluetooth Microcontroller\nUSE: Provides wireless communication and internet connectivity\nUSED IN: Smart homes, IoT devices, automation systems\nABOUT: A powerful and affordable board supporting both WiFi and Bluetooth for modern connected projects",
+
+"ESP8266":"TYPE: WiFi Microcontroller Module\nUSE: Adds internet connectivity to projects\nUSED IN: IoT systems, smart devices, remote monitoring\nABOUT: Low-cost module widely used for wireless communication and internet-based control",
+
+"Raspberry Pi Pico":"TYPE: Microcontroller Board\nUSE: Controls hardware and embedded systems\nUSED IN: Automation, robotics, embedded programming\nABOUT: A fast and efficient board with strong performance for embedded applications",
+
+"STM32":"TYPE: High-Performance Microcontroller\nUSE: Executes advanced and high-speed tasks\nUSED IN: Industrial systems, embedded solutions\nABOUT: Widely used in professional electronics for its performance and reliability",
+
+" Breadboard":"TYPE: Prototyping Component\nUSE: Builds circuits without soldering\nUSED IN: Testing, learning electronics, prototyping\nABOUT: Allows easy connection of components using holes, making circuit building quick and reusable",
+
+/* ================= SENSORS ================= */
+
+"Ultrasonic":"TYPE: Distance Sensor\nUSE: Measures distance using sound waves\nUSED IN: Obstacle detection, robotics, parking systems\nABOUT: Sends sound pulses and calculates distance from the returning echo",
+
+"DHT11":"TYPE: Temperature & Humidity Sensor\nUSE: Measures environmental temperature and humidity\nUSED IN: Weather systems, monitoring devices\nABOUT: Simple and low-cost sensor suitable for basic environmental data",
+
+"DHT22":"TYPE: Advanced Temperature Sensor\nUSE: Provides accurate temperature and humidity readings\nUSED IN: Smart monitoring systems, weather stations\nABOUT: More precise and reliable than DHT11",
+
+"MQ2":"TYPE: Gas Sensor\nUSE: Detects smoke and flammable gases\nUSED IN: Safety systems, gas leakage detection\nABOUT: Commonly used for detecting LPG, methane, and smoke",
+
+"MQ3":"TYPE: Alcohol Sensor\nUSE: Detects alcohol levels in air\nUSED IN: Breath analyzers, safety systems\nABOUT: Used for alcohol detection applications",
+
+"MQ135":"TYPE: Air Quality Sensor\nUSE: Measures pollution and harmful gases\nUSED IN: Air quality monitoring systems\nABOUT: Detects gases like CO2, NH3 and pollutants",
+
+"PIR":"TYPE: Motion Sensor\nUSE: Detects human movement\nUSED IN: Security systems, automatic lighting\nABOUT: Triggers when motion is detected in its range",
+
+"IR Sensor":"TYPE: Infrared Sensor\nUSE: Detects objects using infrared light\nUSED IN: Line follower robots, obstacle detection\nABOUT: Commonly used in robotics for sensing objects",
+
+"Soil Moisture":"TYPE: Environmental Sensor\nUSE: Measures water level in soil\nUSED IN: Smart irrigation, agriculture systems\nABOUT: Helps automate watering based on soil condition",
+
+"Flame":"TYPE: Fire Detection Sensor\nUSE: Detects flame or fire\nUSED IN: Fire alarms, safety systems\nABOUT: Senses infrared light emitted by flames",
+
+"Rain":"TYPE: Water Sensor\nUSE: Detects rain or water droplets\nUSED IN: Weather systems, rain alerts\nABOUT: Used to sense moisture on surfaces",
+
+"Sound":"TYPE: Sound Detection Sensor\nUSE: Detects sound levels\nUSED IN: Clap switches, audio detection systems\nABOUT: Converts sound waves into electrical signals",
+
+"LDR":"TYPE: Light Sensor\nUSE: Detects light intensity\nUSED IN: Automatic lighting systems\nABOUT: Resistance changes based on light exposure",
+
+"Touch Sensor":"TYPE: Capacitive Sensor\nUSE: Detects touch input\nUSED IN: Smart switches, control panels\nABOUT: Works like a touch button",
+
+"MPU6050":"TYPE: Motion Sensor\nUSE: Detects rotation and acceleration\nUSED IN: Drones, robotics, balancing systems\nABOUT: Combines gyroscope and accelerometer",
+
+"ADXL345":"TYPE: Accelerometer Sensor\nUSE: Measures movement and tilt\nUSED IN: Motion tracking systems\nABOUT: High precision motion detection",
+
+"RFID":"TYPE: Identification Sensor\nUSE: Reads RFID tags/cards\nUSED IN: Attendance systems, access control\nABOUT: Enables contactless identification",
+
+"Fingerprint":"TYPE: Biometric Sensor\nUSE: Recognizes fingerprints\nUSED IN: Security systems, authentication\nABOUT: Provides secure access using fingerprints",
+
+"Gas Sensor":"TYPE: Safety Sensor\nUSE: Detects harmful gases\nUSED IN: Safety monitoring systems\nABOUT: Alerts when dangerous gases are present",
+
+"Pressure Sensor":"TYPE: Pressure Sensor\nUSE: Measures force or pressure\nUSED IN: Weather and industrial systems\nABOUT: Detects changes in pressure",
+
+"BMP280":"TYPE: Environmental Sensor\nUSE: Measures air pressure and temperature\nUSED IN: Weather stations\nABOUT: Highly accurate sensor",
+
+"Barometer":"TYPE: Pressure Sensor\nUSE: Measures atmospheric pressure\nUSED IN: Weather forecasting\nABOUT: Helps predict weather changes",
+
+"Current Sensor":"TYPE: Electrical Sensor\nUSE: Measures current flow\nUSED IN: Power monitoring systems\nABOUT: Helps track electricity usage",
+
+"Voltage Sensor":"TYPE: Electrical Sensor\nUSE: Measures voltage levels\nUSED IN: Circuit monitoring\nABOUT: Detects voltage in circuits",
+
+/* ================= DISPLAY ================= */
+
+"16x2 LCD":"TYPE: Text Display\nUSE: Displays text output\nUSED IN: Basic electronics projects\nABOUT: Shows 16 characters per line",
+
+"20x4 LCD":"TYPE: Text Display\nUSE: Displays larger text data\nUSED IN: Complex systems\nABOUT: Displays more content than 16x2",
+
+"OLED 0.96":"TYPE: Graphic Display\nUSE: Displays text and graphics\nUSED IN: IoT devices\nABOUT: High contrast display",
+
+"OLED 1.3":"TYPE: Graphic Display\nUSE: Displays clear visuals\nUSED IN: Smart devices\nABOUT: Bigger and clearer OLED",
+
+"7 Segment":"TYPE: Numeric Display\nUSE: Displays numbers\nUSED IN: Counters, timers\nABOUT: Used for numeric output",
+
+"TFT Display":"TYPE: Color Display\nUSE: Shows graphics and UI\nUSED IN: Advanced interfaces\nABOUT: Full-color display",
+
+/* ================= MOTORS ================= */
+
+"SG90 Servo":"TYPE: Servo Motor\nUSE: Controls angle precisely\nUSED IN: Robotics, automation\nABOUT: Rotates to specific angles",
+
+"MG995 Servo":"TYPE: High Torque Servo\nUSE: Provides strong rotation\nUSED IN: Robotic arms\nABOUT: Powerful motor",
+
+"DC Motor":"TYPE: Electric Motor\nUSE: Provides continuous rotation\nUSED IN: Wheels, fans\nABOUT: Simple motor",
+
+"BO Motor":"TYPE: Gear Motor\nUSE: Drives robotic wheels\nUSED IN: Robot cars\nABOUT: Small and efficient motor",
+
+"Stepper Motor":"TYPE: Precision Motor\nUSE: Moves in steps\nUSED IN: CNC machines, 3D printers\nABOUT: Highly accurate motor",
+
+"Vibration Motor":"TYPE: Feedback Motor\nUSE: Produces vibration\nUSED IN: Alerts, notifications\nABOUT: Used for feedback",
+
+/* ================= MODULES ================= */
+
+"HC05":"TYPE: Bluetooth Module\nUSE: Enables wireless communication\nUSED IN: Mobile control systems\nABOUT: Connects phone with Arduino",
+
+"HC06":"TYPE: Bluetooth Module\nUSE: Simple wireless data transfer\nUSED IN: Basic communication\nABOUT: Easy to use module",
+
+"GPS":"TYPE: Positioning Module\nUSE: Provides location data\nUSED IN: Navigation systems\nABOUT: Uses satellite signals",
+
+"WiFi Module":"TYPE: Communication Module\nUSE: Enables internet connectivity\nUSED IN: IoT systems\nABOUT: Wireless network access",
+
+/* ================= POWER ================= */
+
+"Relay 5V":"TYPE: Switching Module\nUSE: Controls high voltage devices\nUSED IN: Home automation\nABOUT: Works like electronic switch",
+
+"Relay 12V":"TYPE: Power Relay\nUSE: Switches heavy loads\nUSED IN: Industrial systems\nABOUT: Handles high voltage",
+
+"LM2596":"TYPE: Voltage Regulator\nUSE: Reduces voltage safely\nUSED IN: Power supply systems\nABOUT: Step-down converter",
+
+"18650 Battery":"TYPE: Power Source\nUSE: Supplies rechargeable power\nUSED IN: Portable devices\nABOUT: Lithium battery",
+
+"Battery Holder":"TYPE: Power Component\nUSE: Holds batteries securely\nUSED IN: Circuits\nABOUT: Easy connection",
+
+"9V Clip":"TYPE: Power Connector\nUSE: Connects 9V battery\nUSED IN: Circuits\nABOUT: Simple connector",
+
+"Power Module":"TYPE: Power Supply\nUSE: Provides stable voltage\nUSED IN: Breadboard circuits\nABOUT: Easy power source",
+
+"MB102":"TYPE: Breadboard Power Module\nUSE: Supplies 3.3V/5V power\nUSED IN: Prototyping\nABOUT: Plug-and-play power supply",
+
+
+/* ===== EXTRA COMPONENTS ===== */
+
+"Buck Converter":"TYPE: Voltage Regulator Module\nUSE: Converts high voltage into lower stable voltage efficiently\nUSED IN: Power supply circuits, battery-powered projects, electronics systems\nABOUT: Also known as a step-down converter, it safely reduces voltage without wasting much energy, making it ideal for powering sensitive components",
+
+"Breadboard":"TYPE: Prototyping Component\nUSE: Builds and tests circuits without soldering\nUSED IN: Learning electronics, circuit testing, prototyping projects\nABOUT: A reusable board with holes that allows easy connection of components using jumper wires, perfect for beginners and rapid testing",
+
+"Bluetooth Module":"TYPE: Wireless Communication Module\nUSE: Enables wireless data transfer between devices\nUSED IN: Mobile-controlled robots, wireless systems, IoT projects\nABOUT: Commonly used modules like HC-05/HC-06 allow Arduino or other controllers to communicate with smartphones via Bluetooth easily"
+ 
+};
+
+let priceMap = {
+"Arduino Uno":499,
+"Arduino Nano":299,
+"Arduino Mega":899,
+"ESP32":399,
+"ESP8266":249,
+"Raspberry Pi Pico":499,
+"STM32":399,
+"Arduino Micro":349,
+"Arduino Due":1199,
+"Breadboard":120,
+"Ultrasonic":99,
+"MQ2":129,
+"MQ3":139,
+"MQ135":149,
+"DHT11":89,
+"DHT22":149,
+"PIR":119,
+"IR Sensor":79,
+"Soil Moisture":99,
+"Flame":79,
+"Sound":89,
+"LDR":29,
+"Touch Sensor":69,
+"MPU6050":199,
+"ADXL345":249,
+"RFID":179,
+"Fingerprint":1299,
+"Gas Sensor":149,
+"Pressure Sensor":249,
+"BMP280":299,
+"Barometer":299,
+"Current Sensor":199,
+"Voltage Sensor":149,
+"16x2 LCD":199,
+"20x4 LCD":349,
+"OLED 0.96":249,
+"OLED 1.3":299,
+"7 Segment":39,
+"TFT Display":699,
+"SG90 Servo":149,
+"MG995 Servo":399,
+"DC Motor":129,
+"BO Motor":119,
+"Stepper Motor":499,
+"Vibration Motor":89,
+"HC05":249,
+"HC06":199,
+"GPS":799,
+"WiFi Module":199,
+"Bluetooth Module":249,
+"Relay 5V":79,
+"Relay 12V":99,
+"LM2596":149,
+"Battery Holder":49,
+"18650 Battery":199,
+"9V Clip":29,
+"Power Module":199,
+"Buck Converter":149
+};
+
+
+/* AUTO CREATE PRODUCTS */
+for(let cat in categories){
+categories[cat].forEach(item=>{
+products.push({
+name:item,
+category:cat,
+price: priceMap[item] || 0,
+image: imageMap[item] ? imageMap[item] : "images/default.jpg"
+});
+});
+}
+
+let grid=document.getElementById("productGrid");
+
+function displayProducts(list){
+grid.innerHTML="";
+list.forEach(p=>{
+grid.innerHTML+=`
+<div class="card" 
+<div class="card" 
+onmouseenter="showCardDetails(this,'${p.name}')"
+onmouseleave="hideCardDetails(this)">
+<div class="card" onclick="toggleDetails(this,'${p.name}')">
+
+<img src="${p.image}" onerror="this.src='images/default.jpg'">
+
+<h3>${p.name}</h3>
+<p class="price">₹${priceMap[p.name] || "--"}</p>
+
+<div class="card-details hidden" id="detail-${p.name}"></div>
+
+<button class="add-btn" id="btn-${p.name}" onclick="addToCart('${p.name}',this)">
+Add to Cart
+</button>
+
+</div>`;
+});
+}
+
+displayProducts(products);
+
+function searchProducts(){
+let value=document.getElementById("searchInput").value.toLowerCase();
+displayProducts(products.filter(p=>p.name.toLowerCase().includes(value)));
+}
+
+function filterCategory(cat){
+
+if(cat==="All"){
+displayProducts(products);
+}else{
+displayProducts(products.filter(p=>p.category===cat));
+}
+
+/* 🔥 Auto Scroll to Products Section */
+document.getElementById("products").scrollIntoView({
+behavior: "smooth"
+});
+}
+
+let cart={};
+
+function addToCart(product, btn){
+
+if(cart[product]) cart[product]++;
+else cart[product]=1;
+
+updateCart();
+
+/* 🔥 Button Update */
+btn.classList.add("clicked");
+btn.innerText = "Added (" + cart[product] + ")";
+
+setTimeout(()=>{
+btn.classList.remove("clicked");
+btn.innerText = "Add to Cart (" + cart[product] + ")";
+},800);
+}
+function updateCart(){
+
+let div=document.getElementById("cartItems");
+div.innerHTML="";
+let total=0;
+
+/* 🔥 Pehle sab buttons reset karo */
+/* 🔥 Sab buttons reset karo */
+document.querySelectorAll(".add-btn").forEach(btn=>{
+btn.innerText = "Add to Cart";
+});
+
+/* 🔥 Cart items ke buttons update karo */
+for(let item in cart){
+
+let btn = document.getElementById("btn-"+item);
+if(btn){
+btn.innerText = "Add to Cart (" + cart[item] + ")";
+}
+}
+
+for(let item in cart){
+
+total+=cart[item];
+
+/* 🔥 Button update */
+let btn = document.getElementById("btn-"+item);
+if(btn){
+btn.innerText = "Add to Cart (" + cart[item] + ")";
+}
+
+let price = priceMap[item] || 0;
+let itemTotal = price * cart[item];
+
+div.innerHTML+=`
+<div class="cart-item">
+<strong>${item}</strong><br>
+
+Price: ₹${price}<br>
+Total: ₹${itemTotal}<br>
+
+<button class="qty-btn" onclick="changeQty('${item}',-1,event)">−</button>
+<span style="margin:0 10px;">${cart[item]}</span>
+<button class="qty-btn" onclick="changeQty('${item}',1,event)">+</button>
+
+<button class="remove-btn" onclick="removeItem('${item}',event)">Remove</button>
+</div>`;
+}
+
+let grandTotal = 0;
+
+for(let item in cart){
+let price = priceMap[item] || 0;
+grandTotal += price * cart[item];
+}
+
+if(grandTotal > 0){
+div.innerHTML += `<h3 style="margin-top:10px;">Total: ₹${grandTotal}</h3>`;
+}
+
+if(total===0) div.innerHTML="Cart Empty";
+
+document.getElementById("cartCount").innerText=total;
+}
+
+function changeQty(item,amount,e){
+if(e) e.stopPropagation();
+cart[item]+=amount;
+if(cart[item]<=0) delete cart[item];
+updateCart();
+}
+
+function removeItem(item,e){
+if(e) e.stopPropagation();
+delete cart[item];
+updateCart();
+}
+
+function toggleCart(){
+document.getElementById("sideCart").classList.toggle("active");
+}
+
+function sendWhatsApp(){
+
+if(Object.keys(cart).length===0){
+alert("Cart Empty");
+return;
+}
+
+let totalPrice = 0;
+let message="Hello, I want to order:%0A%0A";
+
+for(let item in cart){
+
+let qty = cart[item];
+let price = priceMap[item];   // directly priceMap se lo
+
+if(!price){ price = 0; }
+
+let itemTotal = qty * price;
+totalPrice += itemTotal;
+
+message += qty + " x " + item + " = ₹" + itemTotal + "%0A";
+}
+
+message += "%0A%0ATotal Amount: ₹" + totalPrice;
+
+document.getElementById("thankYouPopup").style.display="flex";
+
+setTimeout(function(){
+window.open("https://wa.me/919891721141?text="+message,'_blank');
+},1500);
+
+cart={};
+updateCart();
+}
+
+function openWhatsApp(){
+window.open("https://wa.me/919891721141",'_blank');
+}
+document.addEventListener("click", function(e){
+
+let cartBox = document.getElementById("sideCart");
+let cartIcon = document.querySelector(".cart-icon");
+
+/* Agar cart open hai */
+if(cartBox.classList.contains("active")){
+
+/* Agar click cart ke andar nahi hua aur cart icon par bhi nahi hua */
+if(!cartBox.contains(e.target) && !cartIcon.contains(e.target)){
+cartBox.classList.remove("active");
+}
+
+}
+
+});
+function sendReviewToWhatsApp(){
+
+let name=document.getElementById("reviewName").value;
+let rating=document.getElementById("reviewRating").value;
+let text=document.getElementById("reviewText").value;
+
+if(name==="" || text===""){
+alert("Please fill all fields");
+return;
+}
+
+let stars="★".repeat(rating)+"☆".repeat(5-rating);
+
+let message="New Customer Review:%0A%0A";
+message+="Name: "+name+"%0A";
+message+="Rating: "+stars+"%0A";
+message+="Review: "+text;
+
+window.open("https://wa.me/919891721141?text="+message,'_blank');
+
+/* Clear Fields After Send */
+document.getElementById("reviewName").value="";
+document.getElementById("reviewText").value="";
+}
+
+
+
+function closePopup(){
+document.getElementById("thankYouPopup").style.display="none";
+}
+
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active");
+}
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+link.addEventListener("click", function(){
+document.getElementById("navLinks").classList.remove("active");
+});
+});
+
+async function payNow(){
+
+let total = 0;
+
+for(let item in cart){
+let price = priceMap[item] || 0;
+total += price * cart[item];
+}
+
+if(total === 0){
+alert("Cart is empty");
+return;
+}
+
+// backend ko call
+let res = await fetch("http://localhost:5000/create-order", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ amount: total })
+});
+
+let order = await res.json();
+
+// Razorpay open
+var options = {
+"key": "rzp_live_SdrFsfK0urHabE", // Enter the Key ID generated from the Dashboard
+"amount": order.amount,
+"currency": "INR",
+"name": "ProtoLab Store",
+"description": "Order Payment",
+"order_id": order.id,
+
+handler: function (response){
+
+alert("✅ Payment Successful!");
+
+// 🔥 cart ka backup
+let cartCopy = {...cart};
+
+let message = `🛒 ProtoLab Order
+
+Payment Successful ✅
+
+Payment ID: ${response.razorpay_payment_id}
+
+Items:
+`;
+
+let total = 0;
+
+for(let item in cartCopy){
+let price = priceMap[item] || 0;
+let qty = cartCopy[item];
+total += price * qty;
+
+message += `${item} x ${qty} = ₹${price * qty}\n`;
+}
+
+message += `\nTotal: ₹${total}`;
+
+// 📲 WhatsApp
+let url = "https://wa.me/919891721141?text=" + encodeURIComponent(message);
+window.open(url, "_blank");
+
+// 🔥 ab cart clear karo
+cart = {};
+updateCart();
+
+},
+
+"theme": {
+"color": "#38bdf8"
+}
+};
+
+var rzp = new Razorpay(options);
+rzp.open();
+}
+function showInfoBox(e, name, image){
+
+let info = infoMap[name] || "Basic electronic component.";
+
+let box = document.getElementById("infoBox");
+
+document.getElementById("infoTitle").innerText = name;
+document.getElementById("infoText").innerText = info;
+document.getElementById("infoImg").src = image;
+
+/* Position near hovered card */
+let rect = e.currentTarget.getBoundingClientRect();
+
+/* Default right side */
+let left = rect.right - 40;
+
+/* Agar screen ke bahar ja raha ho toh left side */
+if(left + 260 > window.innerWidth){
+left = rect.left - 270;
+}
+
+box.style.top = rect.top + "px";
+box.style.left = left + "px";
+
+box.style.display = "block";
+}
+
+function hideInfoBox(){
+let box = document.getElementById("infoBox");
+box.style.display = "none";
+box.classList.remove("show");
+}
+
+
+function showCardDetails(card,name){
+
+let box = card.querySelector(".card-details");
+
+let info = infoMap[name] || "";
+
+let formatted = info
+.replace(/TYPE:/g,'<span class="type">TYPE:</span>')
+.replace(/USE:/g,'<span class="use">USE:</span>')
+.replace(/USED IN:/g,'<span class="used">USED IN:</span>')
+.replace(/ABOUT:/g,'<span class="about">ABOUT:</span>')
+.replace(/\n/g,'<br>');   // 🔥 YE MAIN FIX HAI
+
+box.innerHTML = formatted;
+box.classList.add("show");
+}
+
+function hideCardDetails(card){
+let box = card.querySelector(".card-details");
+box.classList.remove("show");
+}
+
+
+function toggleDetails(card,name){
+
+let box = card.querySelector(".card-details");
+
+// agar already open hai → band karo
+if(box.classList.contains("show")){
+box.classList.remove("show");
+return;
+}
+
+// warna open karo
+let info = infoMap[name] || "";
+
+let formatted = info
+.replace(/TYPE:/g,'<span class="type">TYPE:</span>')
+.replace(/USE:/g,'<span class="use">USE:</span>')
+.replace(/USED IN:/g,'<span class="used">USED IN:</span>')
+.replace(/ABOUT:/g,'<span class="about">ABOUT:</span>')
+.replace(/\n/g,'<br>');
+
+box.innerHTML = formatted;
+box.classList.add("show");
+}
+
+
+
+</script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<div id="thankYouPopup" class="popup">
+<div class="popup-content">
+<h2>🎉 Thank You!</h2>
+<p>Your order request has been sent successfully.</p>
+<button onclick="closePopup()">Close</button>
+</div>
+</div>
+
+<div id="infoBox">
+<img id="infoImg">
+<h3 id="infoTitle"></h3>
+<p id="infoText"></p>
+</div>
+
+<footer id="contact" class="footer">
+
+<div class="footer-container">
+
+<!-- LEFT -->
+<div class="footer-left">
+<h2>⚙️ ProtoLab Store</h2>
+<p>
+Your one-stop IoT & Robotics marketplace. Learn, build, and buy — all in one platform designed for beginners and makers.
+</p>
+</div>
+
+<!-- CENTER -->
+<div class="footer-links">
+<h3>Quick Links</h3>
+<a href="#home">Home</a>
+<a href="#components">Components</a>
+<a href="#projects">Projects</a>
+<a href="#why">Why Us</a>
+<a href="#contact">Contact</a>
+</div>
+
+<!-- RIGHT -->
+<div class="footer-contact">
+<h3>Contact Us</h3>
+<p><a href="tel:+919891721141">+91 98917 21141</a></p>
+<p><a href="tel:+918307809393">+91 83078 09393</a></p>
+<p><a href="tel:+919990223270">+91 99902 23270</a></p>
+<p>✉️ parmoodkumar788@gmail.com</p>
+<p>💬 Chat on WhatsApp</p>
+</div>
+
+</div>
+
+<hr>
+
+<div class="footer-bottom">
+<p>© 2026 ProtoLab Store. All rights reserved.</p>
+<span>Built for makers, by makers.</span>
+</div>
+
+</footer>
+
+</body>
+</html>
